@@ -1,0 +1,38 @@
+package com.forum.exceptions;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+public class Response {
+
+    private String message;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String debugMessage;
+
+
+    public Response() {
+    }
+
+    public Response(String message, String debugMessage) {
+        this.message = message;
+        this.debugMessage = debugMessage;
+    }
+
+    public Response(String message) {
+        this.message = message;
+    }
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getDebugMessage() {
+        return debugMessage;
+    }
+
+    public void setDebugMessage(String debugMessage) {
+        this.debugMessage = debugMessage;
+    }
+}
