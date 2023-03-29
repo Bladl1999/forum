@@ -7,7 +7,6 @@ import com.forum.service.UsersService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -19,7 +18,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     public Users findById(long id){
-        return usersRepository.findById(id).orElseThrow(()-> new NoSuchEntity("Fuck you!"));
+        return usersRepository.findById(id).orElseThrow(()-> new NoSuchEntity("No such id!"));
     }
 
     public List<Users> findAll(){
@@ -32,18 +31,12 @@ public class UsersServiceImpl implements UsersService {
 
     public Users deleteById(Long id){
         Users usersFromDB = findById(id);
-        if(usersFromDB != null){
-            usersRepository.deleteById(id);
-        }
+        usersRepository.deleteById(id);
         return usersFromDB;
     }
 
     public Users updateById(Users users){
-        if(findById(users.getId()) != null){
-            return saveUser(users);
-        } else {
-            return null;
-        }
-        //usersRepository.findById(users.getId());
+        findById(users.getId());
+        return saveUser(users);
     }
 }

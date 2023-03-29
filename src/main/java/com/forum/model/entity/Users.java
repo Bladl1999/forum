@@ -1,18 +1,17 @@
 package com.forum.model.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-//todo Добавить ломбок в плагины в препроцессоры
+
 @Entity
 @Getter
 @Setter
 @Table(name = "users")
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //разобраться с этим
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
