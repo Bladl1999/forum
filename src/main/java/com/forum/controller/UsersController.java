@@ -12,12 +12,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("users")
+@RequestMapping("/users")
 public class UsersController {
     private final UsersService usersService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Users> getById(@PathVariable Long id){
+    public ResponseEntity<Users> getById(@PathVariable Long id) {
         return ResponseEntity.ok(usersService.findById(id));
     }
 
@@ -29,7 +29,7 @@ public class UsersController {
 
     @PostMapping
     public ResponseEntity<Users> saveUsers(@RequestBody Users users) {
-       return new ResponseEntity<>(usersService.saveUser(users), HttpStatus.CREATED);
+        return new ResponseEntity<>(usersService.saveUser(users), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
