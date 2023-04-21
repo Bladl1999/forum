@@ -18,7 +18,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     public Users findById(long id){
-        return usersRepository.findById(id).orElseThrow(()-> new NoSuchEntity("No such id!"));
+        return usersRepository.findById(id).orElseThrow(()-> new NoSuchEntity("No such value!"));
     }
 
     public List<Users> findAll(){

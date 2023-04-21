@@ -23,7 +23,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenApi(
             @Value("${APPLICATION_NAME:USER-SERVICE}") String appName,
             @Value("${APPLICATION_DESCRIPTION:Фо́рум (лат. forum — арх. преддверие гробницы; площадка в давильне для подлежащего обработке винограда; рыночная площадь, городской рынок; торжище, центральная площадь):}") String appDescription,
-            @Value("${APPLICATION_VERSION: 0.0.1-SNAPSHOT}") String appVersion) {
+            @Value("${APPLICATION_VERSION:0.0.1-SNAPSHOT}") String appVersion) {
 
         return new OpenAPI().info(new Info().title(appName)
                 .version(appVersion)
