@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Long> {
 
-    @Modifying
-    @Query("UPDATE Users u SET u.name = :name, u.surname = :surname, u.role = :role," +
-            " u.email = :email, u.password = :password WHERE u.id = :id")
-    void updateUser(@Param("id") Long id, @Param("name") String name, @Param("surname") String surname,
-                    @Param("role") String role, @Param("email") String email, @Param("password") String password);
+//    @Modifying
+//    @Query("UPDATE Users u SET u.name = :name, u.surname = :surname, u.role = :role," +
+//            " u.email = :email, u.password = :password WHERE u.id = :id")
+//    void updateUser(@Param("id") Long id, @Param("name") String name, @Param("surname") String surname,
+//                    @Param("role") String role, @Param("email") String email, @Param("password") String password);
 }

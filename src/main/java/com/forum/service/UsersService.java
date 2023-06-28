@@ -1,20 +1,20 @@
 package com.forum.service;
 
-import com.forum.model.entity.Users;
+import com.forum.model.dto.UsersDTO;
 
 import java.util.List;
 
 public interface UsersService {
 
-    Users findById(long id);
+    UsersDTO findById(long id);
 
-    List<Users> findAll();
+    List<UsersDTO> findAll();
 
-    Users saveUser(Users users);
+    UsersDTO saveUser(UsersDTO usersDTO);
 
-    Users deleteById(Long id);
+    UsersDTO deleteById(long id);
 
-    Users updateById(Users users);
+    UsersDTO update(UsersDTO usersDTO, long id);
 
 
 }

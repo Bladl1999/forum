@@ -1,5 +1,6 @@
 package com.forum.controller;
 
+import com.forum.model.dto.UsersDTO;
 import com.forum.model.entity.Users;
 import com.forum.service.UsersService;
 import lombok.RequiredArgsConstructor;
@@ -17,28 +18,28 @@ public class UsersController {
     private final UsersService usersService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Users> getById(@PathVariable Long id) {
+    public ResponseEntity<UsersDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok(usersService.findById(id));
     }
 
 
     @GetMapping
-    public ResponseEntity<List<Users>> getAllUsers() {
+    public ResponseEntity<List<UsersDTO>> getAllUsers() {
         return ResponseEntity.ok(usersService.findAll());
     }
 
     @PostMapping
-    public ResponseEntity<Users> saveUsers(@RequestBody Users users) {
-        return new ResponseEntity<>(usersService.saveUser(users), HttpStatus.CREATED);
+    public ResponseEntity<UsersDTO> saveUsers(@RequestBody UsersDTO usersDTO) {
+        return new ResponseEntity<>(usersService.saveUser(usersDTO), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Users> updateUser(@RequestBody Users users) {
-        return ResponseEntity.ok(usersService.updateById(users));
+    @PatchMapping("/{id}")
+    public ResponseEntity<UsersDTO> updateUser(@PathVariable long id, @RequestBody UsersDTO usersDTO) {
+        return ResponseEntity.ok(usersService.update(usersDTO, id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Users> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<UsersDTO> deleteUser(@PathVariable Long id) {
         return ResponseEntity.ok(usersService.deleteById(id));
     }
 }
