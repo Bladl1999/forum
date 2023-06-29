@@ -2,7 +2,6 @@ package com.forum.service.impl;
 
 import com.forum.exceptions.NoSuchEntity;
 import com.forum.model.dto.UsersDTO;
-import com.forum.model.entity.Users;
 import com.forum.model.mapper.UsersMapper;
 import com.forum.repository.UsersRepository;
 import com.forum.service.UsersService;
@@ -20,11 +19,11 @@ public class UsersServiceImpl implements UsersService {
     private final UsersRepository usersRepository;
     private final UsersMapper usersMapper;
 
-    public UsersDTO findById(long id){
-        return usersRepository.findById(id).map(usersMapper::toDto).orElseThrow(()-> new NoSuchEntity("No such value!"));
+    public UsersDTO findById(long id) {
+        return usersRepository.findById(id).map(usersMapper::toDto).orElseThrow(() -> new NoSuchEntity("No such value!"));
     }
 
-    public List<UsersDTO> findAll(){
+    public List<UsersDTO> findAll() {
         return usersRepository.findAll().stream().map(usersMapper::toDto).collect(Collectors.toList());
     }
 
@@ -35,7 +34,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Transactional
-    public UsersDTO deleteById(long id){
+    public UsersDTO deleteById(long id) {
         UsersDTO usersFromDB = findById(id);
         usersRepository.deleteById(id);
         return usersFromDB;
@@ -43,11 +42,11 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     @Transactional
-    public UsersDTO update(UsersDTO usersDTO, long id) {
-        return usersRepository.findById(id).map(user -> {
+    public UsersDTO update(UsersDTO usersDTO) {
+        return usersRepository.findById(usersDTO.getId()).map(user -> {
             usersMapper.update(usersDTO, user);
             return user;
-        }).map(usersMapper::toDto).orElseThrow(()-> new NoSuchEntity("No such value!"));
+        }).map(usersMapper::toDto).orElseThrow(() -> new NoSuchEntity("No such value!"));
     }
 
 }

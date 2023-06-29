@@ -14,7 +14,7 @@ public interface UsersService {
 
     UsersDTO deleteById(long id);
 
-    UsersDTO update(UsersDTO usersDTO, long id);
+    UsersDTO update(UsersDTO usersDTO);
 
 
 }
