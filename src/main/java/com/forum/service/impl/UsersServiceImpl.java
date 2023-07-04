@@ -1,42 +1,52 @@
 package com.forum.service.impl;
 
 import com.forum.exceptions.NoSuchEntity;
-import com.forum.model.entity.Users;
+import com.forum.model.dto.UsersDTO;
+import com.forum.model.mapper.UsersMapper;
 import com.forum.repository.UsersRepository;
 import com.forum.service.UsersService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
 
     private final UsersRepository usersRepository;
+    private final UsersMapper usersMapper;
 
-    public UsersServiceImpl(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
+    public UsersDTO findById(long id) {
+        return usersRepository.findById(id).map(usersMapper::toDto).orElseThrow(() -> new NoSuchEntity("No such value!"));
     }
 
-    public Users findById(long id){
-        return usersRepository.findById(id).orElseThrow(()-> new NoSuchEntity("No such id!"));
+    public List<UsersDTO> findAll() {
+        return usersRepository.findAll().stream().map(usersMapper::toDto).collect(Collectors.toList());
     }
 
-    public List<Users> findAll(){
-        return usersRepository.findAll();
+    @Override
+    @Transactional
+    public UsersDTO saveUser(UsersDTO usersDTO) {
+        return usersMapper.toDto(usersRepository.saveAndFlush(usersMapper.toEntity(usersDTO)));
     }
 
-    public Users saveUser(Users users){
-        return usersRepository.saveAndFlush(users);
-    }
-
-    public Users deleteById(Long id){
-        Users usersFromDB = findById(id);
+    @Transactional
+    public UsersDTO deleteById(long id) {
+        UsersDTO usersFromDB = findById(id);
         usersRepository.deleteById(id);
         return usersFromDB;
     }
 
-    public Users updateById(Users users){
-        findById(users.getId());
-        return saveUser(users);
+    @Override
+    @Transactional
+    public UsersDTO update(UsersDTO usersDTO) {
+        return usersRepository.findById(usersDTO.getId()).map(user -> {
+            usersMapper.update(usersDTO, user);
+            return user;
+        }).map(usersMapper::toDto).orElseThrow(() -> new NoSuchEntity("No such value!"));
     }
+
 }
