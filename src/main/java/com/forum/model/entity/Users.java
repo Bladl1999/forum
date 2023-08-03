@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,9 +17,9 @@ import javax.persistence.Table;
 @Table(name = "users")
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private UUID id;
 
     @Column(name = "name")
     private String name;
@@ -39,7 +40,7 @@ public class Users {
 
     }
 
-    public Users(Long id, String name, String surname, String role, String email, String password) {
+    public Users(UUID id, String name, String surname, String role, String email, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -47,5 +48,4 @@ public class Users {
         this.email = email;
         this.password = password;
     }
-
 }
