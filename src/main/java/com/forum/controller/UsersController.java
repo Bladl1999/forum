@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -24,7 +25,7 @@ public class UsersController {
     private final UsersService usersService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsersDTO> getById(@PathVariable Long id) {
+    public ResponseEntity<UsersDTO> getById(@PathVariable UUID id) {
         return ResponseEntity.ok(usersService.findById(id));
     }
 
@@ -40,12 +41,12 @@ public class UsersController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<UsersDTO> updateUser(/*@PathVariable long id,*/ @RequestBody UsersDTO usersDTO) {
+    public ResponseEntity<UsersDTO> updateUser(@RequestBody UsersDTO usersDTO) {
         return ResponseEntity.ok(usersService.update(usersDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UsersDTO> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<UsersDTO> deleteUser(@PathVariable UUID id) {
         return ResponseEntity.ok(usersService.deleteById(id));
     }
 }

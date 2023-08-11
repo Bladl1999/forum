@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,7 +20,7 @@ public class UsersServiceImpl implements UsersService {
     private final UsersRepository usersRepository;
     private final UsersMapper usersMapper;
 
-    public UsersDTO findById(long id) {
+    public UsersDTO findById(UUID id) {
         return usersRepository.findById(id).map(usersMapper::toDto).orElseThrow(() -> new NoSuchEntity("No such value!"));
     }
 
@@ -34,7 +35,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Transactional
-    public UsersDTO deleteById(long id) {
+    public UsersDTO deleteById(UUID id) {
         UsersDTO usersFromDB = findById(id);
         usersRepository.deleteById(id);
         return usersFromDB;
