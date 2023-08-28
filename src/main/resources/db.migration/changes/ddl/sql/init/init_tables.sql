@@ -5,8 +5,8 @@ role varchar
 
 create table users(
 id uuid primary key,
-naem varchar,
-surnaem varchar,
+name varchar,
+surname varchar,
 email varchar,
 password varchar
 );
