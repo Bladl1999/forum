@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  forum:
+    container_name: $APP1-$CI_COMMIT_BRANCH
+    image: $AND_DOCKER_REGISTRY_NAME/$PROGECT-$APP1:$CI_COMMIT_BRANCH
+    ports:
+      - 8081:8081
+    restart: always
+    volumes:
+      - /logs/backend:/logs/
