@@ -29,7 +29,6 @@ public class UsersController {
         return ResponseEntity.ok(usersService.findById(id));
     }
 
-
     @GetMapping
     public ResponseEntity<List<UsersDTO>> getAllUsers() {
         return ResponseEntity.ok(usersService.findAll());

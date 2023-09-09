@@ -22,28 +22,28 @@ import java.util.UUID;
 public class ThreadController {
     private final ThreadService threadService;
 
-    @GetMapping("{/id}")
-    public ResponseEntity<ThreadDTO> getById(@PathVariable UUID id){
+    @GetMapping("/{id}")
+    public ResponseEntity<ThreadDTO> getById(@PathVariable UUID id) {
         return ResponseEntity.ok(threadService.findById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<ThreadDTO>> getAll(){
+    public ResponseEntity<List<ThreadDTO>> getAll() {
         return ResponseEntity.ok(threadService.findAll());
     }
 
     @PostMapping
-    public ResponseEntity<ThreadDTO> saveThread(@RequestBody ThreadDTO threadDTO){
-        return ResponseEntity.ok(threadService.update(threadDTO));
+    public ResponseEntity<ThreadDTO> saveThread(@RequestBody ThreadDTO threadDTO) {
+        return ResponseEntity.ok(threadService.saveThread(threadDTO));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ThreadDTO> updateThread(@RequestBody ThreadDTO threadDTO){
+    public ResponseEntity<ThreadDTO> updateThread(@RequestBody ThreadDTO threadDTO) {
         return ResponseEntity.ok(threadService.update(threadDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ThreadDTO> deleteThread(@PathVariable UUID id){
+    public ResponseEntity<ThreadDTO> deleteThread(@PathVariable UUID id) {
         return ResponseEntity.ok(threadService.deleteById(id));
     }
 

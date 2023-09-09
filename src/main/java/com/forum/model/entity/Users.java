@@ -1,6 +1,8 @@
 package com.forum.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -8,13 +10,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,8 +35,8 @@ public class Users {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "role")
-    private String role;
+    @ManyToMany(mappedBy = "user")
+    private Set<Role> role;
 
     @Column(name = "email")
     private String email;
@@ -36,16 +44,7 @@ public class Users {
     @Column(name = "password")
     private String password;
 
-    public Users() {
+    @OneToMany(mappedBy = "user")
+    private List<Thread> threadList;
 
-    }
-
-    public Users(UUID id, String name, String surname, String role, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.role = role;
-        this.email = email;
-        this.password = password;
-    }
 }
